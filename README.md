@@ -1,9 +1,8 @@
+<h1>SpiceScript 2</h1>
 <p align="center">
-  <h1>SpiceScript 2</h1>
   <a href="https://github.com/spicesouls/spicescript2">
     <img src="spicescript-menu.PNG" alt="Menu Of Spicescript" width="500" height="300">
   </a>
-
   <p align="center">
     Your Handy Dandy Cyber Swiss Army Knife
     <br />
