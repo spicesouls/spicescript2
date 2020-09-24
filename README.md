@@ -34,5 +34,5 @@ sudo ./spicescript2.py
 ### One Liner
 
 ```sh
-echo 'git clone https://github.com/spicesouls/spicescript2; cd spicescript2; pip3 install -r requirements.txt; sudo ./spicescript2.py' | sh
-```
+echo 'git clone https://github.com/spicesouls/spicescript2; cd spicescript2; pip3 install -r requirements.txt; sudo python3 spicescript2.py' | sh
+`
