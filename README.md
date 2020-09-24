@@ -36,3 +36,9 @@ sudo ./spicescript2.py
 ```sh
 echo 'git clone https://github.com/spicesouls/spicescript2; cd spicescript2; pip3 install -r requirements.txt; echo ""; echo ""; echo "Ready for running!"; echo ""' | sh
 ```
+
+<p align="center">
+  <a href="https://github.com/spicesouls/spicescript2">
+    <img src="spicescript-terms.PNG" alt="TOS Of Spicescript" width="700" height="300">
+  </a>
+</p>
