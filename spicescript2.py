@@ -390,7 +390,7 @@ randomtop.append(rf'''
 
 ''')
 
-randomtop.append('''{Fore.GREEN}
+randomtop.append(fr'''{Fore.GREEN}
                (`.         ,-,
                `\ `.    ,;' /
                 \`. \ ,'/ .'
