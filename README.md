@@ -28,13 +28,14 @@
 git clone https://github.com/spicesouls/spicescript2
 cd spicescript2
 pip3 install -r requirements.txt
+chmod +x spicescript2.py
 sudo ./spicescript2.py
 ```
 
 ### One Liner
 
 ```sh
-echo 'git clone https://github.com/spicesouls/spicescript2; cd spicescript2; pip3 install -r requirements.txt; echo ""; echo ""; echo "Ready for running!"; echo ""' | sh
+echo 'git clone https://github.com/spicesouls/spicescript2; cd spicescript2; pip3 install -r requirements.txt; chmod +x spicescript2.py; echo ""; echo ""; echo "Ready for running!"; echo ""' | sh
 ```
 
 <p align="center">
