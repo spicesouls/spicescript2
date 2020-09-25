@@ -390,7 +390,22 @@ randomtop.append(rf'''
 
 ''')
 
-
+randomtop.append('''{Fore.GREEN}
+               (`.         ,-,
+               `\ `.    ,;' /
+                \`. \ ,'/ .'
+          __     `.\ Y /.'
+       .-'  ''--.._` ` (
+     .'            /   `
+    ,           ` '   Q '
+    ,         ,   `._    \
+    |         '     `-.;_'
+    `  ;    `  ` --,.._;
+    `    ,   )   .'
+     `._ ,  '   /_
+        ; ,''-,;' ``-
+         ``-..__\``--`  {Fore.RESET}Wake up, Neo
+''')
 
 def loopbreak():
 	clear()
