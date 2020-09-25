@@ -407,6 +407,23 @@ randomtop.append(fr'''{Fore.GREEN}
          ``-..__\``--`  {Fore.RESET}Wake up, Neo
 ''')
 
+randomtop.append(fr'''{Fore.GREEN}
+           //
+         _//
+        .. ~~-_
+   ___m<___m___~.___            {Fore.RESET}{styleBold}Rabbit spying over a wall...{styleReset}{Fore.GREEN}
+   _|__|__|__|__|__|
+   |__|__|__|__|__|_
+
+           //
+         _//
+        oo ~~-_
+   ___m<___m___~.___            {Fore.RESET}{styleBold}And the same rabbit after seeing{styleReset}{Fore.GREEN}
+   _|__|__|__|__|__|            {Fore.RESET}{styleBold}something that was more than{styleReset}{Fore.GREEN}
+   |__|__|__|__|__|_            {Fore.RESET}{styleBold}he bargained for.. :){styleReset}{Fore.GREEN}
+''')
+
+
 def loopbreak():
 	clear()
 	if bannerenabled == True:
