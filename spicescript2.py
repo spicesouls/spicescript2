@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 try:
 	import sys
 	import os
@@ -8,6 +9,7 @@ try:
 	import socket
 	import random
 	import requests
+	from bs4 import BeautifulSoup
 	from scapy.all import *
 	from scapy.layers.inet import IP, ICMP
 	from queue import Queue
@@ -22,6 +24,8 @@ try:
 	styleUnderline = '\u001b[4m'
 except Exception as e:
 	print(f'lol {e}')
+
+configlocation = str(os.popen('locate /spicescript2/cfg.json').read().replace('\n', ''))
 
 def clear():
     if sys.platform == "win32":
@@ -60,7 +64,7 @@ def startup():
 		sys.exit()
 	else:
 		global cfg
-		terms = open('cfg.json', 'r')
+		terms = open(configlocation, 'r')
 		cfg = json.loads(terms.read())
 		terms.close()
 		if cfg['terms'] == "True":
@@ -70,7 +74,7 @@ def startup():
 			discresponse = input(f'{Fore.YELLOW}')
 			print(f'{Fore.RESET}')
 			if discresponse == 'I accept these terms.':
-				termsw = open('cfg.json', 'w')
+				termsw = open(configlocation, 'w')
 				ncfg = cfg
 				ncfg['terms'] = "True"
 				termsw.write(json.dumps(ncfg))
@@ -91,40 +95,7 @@ clear()
 
 randomtop = []
 
-randomtop.append(f'''{Fore.RED}                          _____                          
-                   _.+sd$$$$$$$$$bs+._                   
-               .+d$$$$$$$$$$$$$$$$$$$$$b+.               
-            .sd$$$$$$$P^*^T$$$P^*"*^T$$$$$bs.            
-          .s$$$$$$$$P*     `*' _._  `T$$$$$$$s.          
-        .s$$$$$$$$$P          ` :$;   T$$$$$$$$s.        
-       s$$$$$$$$$$;  db..+s.   `**'    T$$$$$$$$$s       
-     .$$$$$$$$$$$$'  `T$P*'             T$$$$$$$$$$.     
-    .$$$$$$$$$$$$P                       T$$$$$$$$$$.    
-   .$$$$$$$$$$$$$b                       `$$$$$$$$$$$.   
-  :$$$$$$$$$$$$$$$.                       T$$$$$$$$$$$;  
-  $$$$$$$$$P^*' :$$b.                     d$$$$$$$$$$$$  
- :$$$$$$$P'      T$$$$bs._               :P'`*^T$$$$$$$; 
- $$$$$$$P         `*T$$$$$b              '      `T$$$$$$ 
-:$$$$$$$b            `*T$$$s                      :$$$$$;
-:$$$$$$$$b.                                        $$$$$;
-$$$$$$$$$$$b.                                     :$$$$$$
-$$$$$$$$$$$$$bs.                                 .$$$$$$$
-$$$$$$$$$$$$$$$$$bs.                           .d$$$$$$$$
-:$$$$$$$$$$$$$P*"*T$$bs,._                  .sd$$$$$$$$$;
-:$$$$$$$$$$$$P     TP^**T$bss++.._____..++sd$$$$$$$$$$$$;
- $$$$$$$$$$$$b           `T$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
- :$$$$$$$$$$$$b.           `*T$$P^*"*"*^^*T$$$$$$$$$$$$; 
-  $$$b       `T$b+                        :$$$$$$$BUG$$  
-  :$P'         `"'               ,._.     ;$$$$$$$$$$$;  
-   \                            `*TP*     d$$P*******$   
-    \                                    :$$P'      /    
-     \                                  :dP'       /     
-      `.                               d$P       .'      
-        `.                             `'      .'        
-          `-.                               .-'          
-             `-.                         .-'             
-                `*+-._             _.-+*'                
-                      `"*-------*"' {Fore.RESET}''')
+
 
 
 randomtop.append(f'''{Fore.RED}      ooooooooooooooooooooooooooooooooooooo
@@ -168,28 +139,6 @@ _)      \.___.,|     .'
      `-'       `--' 
 ''')
 
-randomtop.append(rf'''{Fore.RED}
-          ___
-        ,"---".
-        :     ;
-         `-.-'
-          | |
-          | |
-          | | {Fore.RESET}
-       _.-{Fore.RED}\_/{Fore.RESET}-._
-    _ / |     | \ _
-   / /   `---'   \ \
-  /  `-----------'  \
- /,-""-.       ,-""-.\
-( i-..-i       i-..-i )
-|`|    |-------|    |'|
-\ `-..-'  ,=.  `-..-'/
- `--------|=|-------'
-          | |
-          \ \
-           ) ) 
-          / /
-         ( ( {Fore.RESET}''')
 
 randomtop.append(rf'''{Fore.RED}
 .-.{Fore.RESET}-----------{Fore.RED}.-.
@@ -204,23 +153,6 @@ randomtop.append(rf'''{Fore.RED}
 "--^-----^-^^---'
 ''')
 
-randomtop.append(rf'''{Fore.BLUE}
-    ,d88b
- ,8P'    `8,
- 8'       {Fore.RESET}_.{Fore.BLUE}8{Fore.RESET}._{Fore.BLUE}
-8{Fore.RESET}       .'  |  '.
-       /    |    \
-      |    [_]    |
-      |     |     |
-      |-----'-----|
-      |           |
-      |           |
-      |;         .|
-      ;\         /;
-       \\       //
-        \'._ _.'/
-         '-...-'
-''')
 
 randomtop.append(rf'''
               {Fore.RED}_{Fore.RESET}
@@ -267,29 +199,6 @@ different ways. Three of the most common ones are "The Web", "Email" and
 ''')
 
 
-randomtop.append(rf'''
-
-  .d^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^b.
-  $      `.                                    $
-  $        `.                                .-$
-  $          `.                          .-*'  $
-  $            `.                    .-*'      $
-  $              ;               .-*'          $
-  $      .-'`.   |           .-*'    .         $
-  $     /.'"`.\  |___________;   .-*'|         $
-  $    ::     ;; |           |   |   |         $
-  $    ||     || |           |   |   |         $
-  $    ::     ;; |""""""""""";   | `"|         $
-  $     \`._,'/  |           `*-.|   |         $
-  $      `-..'   ;               `*-.|         $
-  $            .'                    `*-.      $
-  $          .'       .-.                `*-.  $
-  $        .'      ._/   \                   `*$
-  $      .'      .'_/     \_.                  $
-  $. {Fore.RED}ENERGY 100{Fore.RESET} /.'/       \ `.      {Fore.RED}AMMO 320{Fore.RESET} .$
-  `TssssssssssssssssssssssssssssssssssssssssssP'
-''')
-
 
 randomtop.append(rf'''{styleBold}
 Fight Bugs{styleReset}                      |     |
@@ -315,28 +224,6 @@ Fight Bugs{styleReset}                      |     |
 / / /       \/       \ \ \  [____>   <____]
 ''')
 
-
-randomtop.append(rf'''{Fore.GREEN}
-             @      @
-     / \     ( _____)      / \
-   /  |  \___/*******\___/  |  \
-  (   I  /   ~   '   ~   \  I   )
-   \  |  |   {styleBold}{Fore.RESET}0       0{styleReset}{Fore.GREEN}   |  |  /
-     \   |       A       |   /
-       \__    _______    __/
-          \_____________/
-    _-------*         *-------_
-   /  /---      VAX       ---\  \
- /  /     (    System   )     \  \
-(  (     (    Gremlin!   )     )  )
- \  \    |               |    /  /
-   \  \  |               |  /  /
-    **** |               | ****
-   //|\\  \_____________/  //|\\
-   *         '*** ***'         *
-  ***.       .*** ***.       .***
-  '*************' '*************'
-''')
 
 
 
@@ -423,6 +310,24 @@ randomtop.append(fr'''{Fore.GREEN}
    |__|__|__|__|__|_            {Fore.RESET}{styleBold}he bargained for.. :){styleReset}{Fore.GREEN}
 ''')
 
+randomtop.append(fr'''{Back.BLUE}{Fore.WHITE}
+YOU DIDN'T SAY THE MAGIC WORD!
+YOU DIDN'T SAY THE MAGIC WORD!
+YOU DIDN'T SAY THE MAGIC WORD!
+YOU DIDN'T SAY THE MAGIC WORD!
+YOU DIDN'T SAY THE MAGIC WORD!
+YOU DIDN'T SAY THE MAGIC WORD!
+YOU DIDN'T SAY THE MAGIC WORD!
+{Back.RESET}{Fore.RESET}''')
+
+quotes = []
+quotes.append('The quieter you become, the more you are able to hear.')
+quotes.append('h4ck th3 w0rld!')
+quotes.append('foo.bar()')
+quotes.append('Hello World!')
+quotes.append('Goodbye Cruel World!')
+randomquote = random.choice(quotes)
+
 
 def loopbreak():
 	clear()
@@ -436,10 +341,10 @@ def loopbreak():
 |__   | . | |  _| -_|__   |  _|  _| | . |  _|  |  _|
 |_____|  _|_|___|___|_____|___|_| |_|  _|_|    |___|
       |_|                           |_|              {styleReset}
-Your Cyber Swiss Army Knife!			  
+{randomquote}			  
 
 Made By {styleBold}{Fore.YELLOW}SpiceSouls{styleReset}
-Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
+Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
 	print(banner)
 	print(menu)
 
@@ -453,18 +358,20 @@ banner = f'''{top}{styleBold}{Fore.YELLOW}
 |__   | . | |  _| -_|__   |  _|  _| | . |  _|  |  _|
 |_____|  _|_|___|___|_____|___|_| |_|  _|_|    |___|
       |_|                           |_|              {styleReset}
-Your Cyber Swiss Army Knife!			  
+{randomquote}			  
 
 Made By {styleBold}{Fore.YELLOW}SpiceSouls{styleReset}
-Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
+Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
 print(banner)
 
 menu = f'''
 {styleBold}-1-{styleReset} Enumeration
 {styleBold}-2-{styleReset} Payloads
 {styleBold}-3-{styleReset} Networking
-{styleBold}-4-{styleReset} Extras
-{styleBold}-5-{styleReset} Settings
+{styleBold}-4-{styleReset} Exploitation
+{styleBold}-5-{styleReset} OSINT
+{styleBold}-6-{styleReset} Extras
+{styleBold}-7-{styleReset} Settings
 
 {styleBold}-0-{styleReset} Exit
 '''
@@ -492,10 +399,10 @@ while True:
 |__   | . | |  _| -_|__   |  _|  _| | . |  _|  |  _|
 |_____|  _|_|___|___|_____|___|_| |_|  _|_|    |___|
       |_|                           |_|              {styleReset}
-Your Cyber Swiss Army Knife!			  
+{randomquote}			  
 
 Made By {styleBold}{Fore.YELLOW}SpiceSouls{styleReset}
-Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
+Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
 				print(banner)
 				emenu = f'''
 {styleBold}-1-{styleReset} Port Scan
@@ -718,10 +625,10 @@ Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
 |__   | . | |  _| -_|__   |  _|  _| | . |  _|  |  _|
 |_____|  _|_|___|___|_____|___|_| |_|  _|_|    |___|
       |_|                           |_|              {styleReset}
-Your Cyber Swiss Army Knife!			  
+{randomquote}			  
 
 Made By {styleBold}{Fore.YELLOW}SpiceSouls{styleReset}
-Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
+Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
 				print(banner)
 				pmenu = f'''
 {styleBold}-1-{styleReset} Bash Payload
@@ -958,10 +865,10 @@ function printit ($string) {
 |__   | . | |  _| -_|__   |  _|  _| | . |  _|  |  _|
 |_____|  _|_|___|___|_____|___|_| |_|  _|_|    |___|
       |_|                           |_|              {styleReset}
-Your Cyber Swiss Army Knife!			  
+{randomquote}			  
 
 Made By {styleBold}{Fore.YELLOW}SpiceSouls{styleReset}
-Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
+Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
 				print(banner)
 				nmenu = f'''
 {styleBold}-1-{styleReset} List IPV4 Routes
@@ -1078,6 +985,7 @@ Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
 						loopbreak()
 						break
 
+#################################################################################################### Exploitation
 
 			if menuchoice == '4':
 				clear()
@@ -1093,10 +1001,169 @@ Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
 |__   | . | |  _| -_|__   |  _|  _| | . |  _|  |  _|
 |_____|  _|_|___|___|_____|___|_| |_|  _|_|    |___|
       |_|                           |_|              {styleReset}
-Your Cyber Swiss Army Knife!			  
+{randomquote}			  
 
 Made By {styleBold}{Fore.YELLOW}SpiceSouls{styleReset}
-Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
+Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
+				print(banner)
+				expmenu = f'''
+{styleBold}-1-{styleReset} XSS Scanner
+
+{styleBold}-0-{styleReset} Return To Menu
+'''
+				print(expmenu)
+				while True:
+					
+					expmenuchoice = str(input(f'{styleBold}#{styleReset}/Exploitation '))
+
+					if expmenuchoice == '0':
+						loopbreak()
+						break
+
+					elif expmenuchoice == '1':
+						clear()
+						url = str(input(f'URL {Fore.YELLOW}>>>{Fore.RESET} '))
+						try:
+							warning('Finding page inputs...')
+							content = requests.get(f'{url}')
+							content = content.text
+							directories = []
+							soup = BeautifulSoup(content, "html.parser")
+							inputs = soup.find_all("input")
+							actualinputs = []
+							for inp in inputs:
+								try:
+									actualinputs.append(inp['name'])
+									pass
+								except KeyError:
+									pass
+							if(len(inputs) == 0):
+								error('No Inputs Found.')
+								input('Press ENTER To Continue.')
+								loopbreak()
+								break
+							else:
+								success(f'Found {str(len(actualinputs))} Inputs!')
+								warning('Starting XSS Fuzzing...')
+							o = open('vctrs/xss.txt', 'r')
+							payloads = o.readlines()
+							try:
+								for inp in actualinputs:
+									warning(f'Testing Input {inp}...')
+									for payload in payloads:
+										result = requests.get(f'{url}/?{inp}={payload}')
+										if payload in result.text:
+											success(f'Found UnSanitized Input!\nInput: {inp}\nPayload: {payload}')
+										else:
+											pass
+
+							except:
+								pass
+							finally:
+								o.close()
+
+						except:
+							loopbreak()
+							break
+
+
+
+					elif expmenuchoice == '2':
+						loopbreak()
+						break
+
+					elif expmenuchoice == '3':
+						loopbreak()
+						break
+
+
+			if menuchoice == '5':
+				clear()
+				if bannerenabled == True:
+					top = random.choice(randomtop)
+					bannerstatus = f'{Style.BRIGHT}{Fore.GREEN}ON{Fore.RESET}{Style.RESET_ALL}'
+				else:
+					top = ''
+					bannerstatus = f'{Style.BRIGHT}{Fore.RED}OFF{Fore.RESET}{Style.RESET_ALL}'
+				banner = f'''{top}{styleBold}{Fore.YELLOW}                                                    
+ _____     _         _____         _     _      ___ 
+|   __|___|_|___ ___|   __|___ ___|_|___| |_   |_  |
+|__   | . | |  _| -_|__   |  _|  _| | . |  _|  |  _|
+|_____|  _|_|___|___|_____|___|_| |_|  _|_|    |___|
+      |_|                           |_|              {styleReset}
+{randomquote}			  
+
+Made By {styleBold}{Fore.YELLOW}SpiceSouls{styleReset}
+Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
+				print(banner)
+				exmenu = f'''
+{styleBold}-1-{styleReset} Social Media Hunter
+
+{styleBold}-0-{styleReset} Return To Menu
+'''
+				print(exmenu)
+				while True:
+					
+					exmenuchoice = str(input(f'{styleBold}#{styleReset}/OSINT '))
+
+					if exmenuchoice == '0':
+						loopbreak()
+						break
+
+
+					elif exmenuchoice == '1':
+						clear()
+						username = str(input(f'USERNAME {Fore.YELLOW}>>>{Fore.RESET} '))
+						warning('Searching...')
+						socialmedia = [f'https://www.instagram.com/{username}', 
+						f'https://www.facebook.com/{username}',
+						f'https://{username}.tumblr.com/',
+						f'https://www.pinterest.co.uk/{username}',
+						f'http://www.linkedin.com/in/{username}'
+							]
+						for url in socialmedia:
+							try:
+								r = requests.get(url)
+								if r.status_code == 404:
+									pass
+								elif r.status_code == 302:
+									pass
+								elif "this page isn't available." in r.text:
+									pass
+								elif "Try searching for another." in r.text:
+									pass
+								elif "could not be found." in r.text:
+									pass
+								else:
+									success(url)
+							except Exception as e:
+								error(e)
+
+						print('\n')
+						success('Finished!')
+						input('Press ENTER To Continue.')
+						loopbreak()
+						break
+
+
+			if menuchoice == '6':
+				clear()
+				if bannerenabled == True:
+					top = random.choice(randomtop)
+					bannerstatus = f'{Style.BRIGHT}{Fore.GREEN}ON{Fore.RESET}{Style.RESET_ALL}'
+				else:
+					top = ''
+					bannerstatus = f'{Style.BRIGHT}{Fore.RED}OFF{Fore.RESET}{Style.RESET_ALL}'
+				banner = f'''{top}{styleBold}{Fore.YELLOW}                                                    
+ _____     _         _____         _     _      ___ 
+|   __|___|_|___ ___|   __|___ ___|_|___| |_   |_  |
+|__   | . | |  _| -_|__   |  _|  _| | . |  _|  |  _|
+|_____|  _|_|___|___|_____|___|_| |_|  _|_|    |___|
+      |_|                           |_|              {styleReset}
+{randomquote}			  
+
+Made By {styleBold}{Fore.YELLOW}SpiceSouls{styleReset}
+Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
 				print(banner)
 				exmenu = f'''
 {styleBold}-1-{styleReset} Start Metasploit
@@ -1106,7 +1173,7 @@ Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
 				print(exmenu)
 				while True:
 					
-					exmenuchoice = str(input(f'{styleBold}#{styleReset}/Settings '))
+					exmenuchoice = str(input(f'{styleBold}#{styleReset}/Extras '))
 
 					if exmenuchoice == '0':
 						loopbreak()
@@ -1124,7 +1191,7 @@ Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
 							sys.exit()
 						loopbreak()
 						break
-			if menuchoice == '5':
+			if menuchoice == '7':
 				clear()
 				if bannerenabled == True:
 					top = random.choice(randomtop)
@@ -1138,10 +1205,10 @@ Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
 |__   | . | |  _| -_|__   |  _|  _| | . |  _|  |  _|
 |_____|  _|_|___|___|_____|___|_| |_|  _|_|    |___|
       |_|                           |_|              {styleReset}
-Your Cyber Swiss Army Knife!			  
+{randomquote}			  
 
 Made By {styleBold}{Fore.YELLOW}SpiceSouls{styleReset}
-Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
+Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
 				print(banner)
 				smenu = f'''
 {styleBold}-1-{styleReset} Enable/Disable Banners\t{bannerstatus}
@@ -1168,11 +1235,11 @@ Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
 							loopbreak()
 							break
 						if bannerenabled == True:
-							terms = open('cfg.json', 'r')
+							terms = open(configlocation, 'r')
 							cfg = json.loads(terms.read())
 							ncfg = cfg
 							ncfg['banners'] = "False"
-							termsw = open('cfg.json', 'w')
+							termsw = open(configlocation, 'w')
 							termsw.write(json.dumps(ncfg))
 							terms.close()
 							termsw.close()
@@ -1180,11 +1247,11 @@ Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
 							success(f'Banners Set to {styleBold}Off!{styleReset}')
 							input('Press ENTER To Continue.')
 						else:
-							terms = open('cfg.json', 'r')
+							terms = open(configlocation, 'r')
 							cfg = json.loads(terms.read())
 							ncfg = cfg
 							ncfg['banners'] = "True"
-							termsw = open('cfg.json', 'w')
+							termsw = open(configlocation, 'w')
 							termsw.write(json.dumps(ncfg))
 							terms.close()
 							termsw.close()
@@ -1198,11 +1265,11 @@ Version {styleBold}{Fore.YELLOW}1.0.0{styleReset}'''
 						clear()
 						warning('How many threads would you like to use at a time?')
 						threadinput = input(f'THREADS {Fore.YELLOW}>>>{Fore.RESET} ')
-						terms = open('cfg.json', 'r')
+						terms = open(configlocation, 'r')
 						cfg = json.loads(terms.read())
 						ncfg = cfg
 						ncfg['threads'] = str(threadinput)
-						termsw = open('cfg.json', 'w')
+						termsw = open(configlocation, 'w')
 						termsw.write(json.dumps(ncfg))
 						terms.close()
 						termsw.close()
