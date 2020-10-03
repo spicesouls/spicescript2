@@ -30,14 +30,14 @@ cd spicescript2
 pip3 install -r requirements.txt
 chmod +x spicescript2.py
 chmod +x add-to-bin.sh
-./add-to-bin.sh
+sudo ./add-to-bin.sh
 spicescript2
 ```
 
 ### One Liner
 
 ```sh
-echo 'git clone https://github.com/spicesouls/spicescript2; cd spicescript2; pip3 install -r requirements.txt; chmod +x spicescript2.py; chmod +x add-to-bin.sh; ./add-to-bin.sh; echo ""; echo ""; echo "Ready for running!"; echo ""' | sh
+sudo echo 'git clone https://github.com/spicesouls/spicescript2; cd spicescript2; pip3 install -r requirements.txt; chmod +x spicescript2.py; chmod +x add-to-bin.sh; ./add-to-bin.sh; echo ""; echo ""; echo "Ready for running!"; echo ""' | sh
 ```
 
 <p align="center">
