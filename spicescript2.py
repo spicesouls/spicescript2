@@ -23,9 +23,8 @@ try:
 	styleReset = '\u001b[0m'
 	styleUnderline = '\u001b[4m'
 except Exception as e:
-	print(f'lol {e}')
-
-configlocation = str(os.popen('locate /spicescript2/cfg.json').read().replace('\n', ''))
+	print(f'Fatal Error: {e}')
+	sys.exit()
 
 def clear():
     if sys.platform == "win32":
@@ -64,6 +63,8 @@ def startup():
 		sys.exit()
 	else:
 		global cfg
+		global configlocation
+		configlocation = 'cfg.json'
 		terms = open(configlocation, 'r')
 		cfg = json.loads(terms.read())
 		terms.close()
