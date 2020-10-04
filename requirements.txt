@@ -3,3 +3,4 @@ colorama
 scapy
 shodan
 paramiko
+bs4
