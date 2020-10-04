@@ -247,8 +247,7 @@ randomtop.append(r'''
                 ||     ||
 ''')
 
-randomtop.append(rf'''
-+-----------------+
+randomtop.append(rf'''+-----------------+
 |                 |
 |                 | {Fore.RED}X    X            X{Fore.RESET}
 |                 |   {Fore.RED}XX{Fore.RESET}
@@ -272,10 +271,7 @@ randomtop.append(rf'''
 |                 |
 |                 |
 +-----------------+
-
-{styleBold}SMASH THE STACK!{styleReset}
-
-''')
+{styleBold}SMASH THE STACK!{styleReset}''')
 
 randomtop.append(fr'''{Fore.GREEN}
                (`.         ,-,
@@ -311,6 +307,10 @@ randomtop.append(fr'''{Fore.GREEN}
 ''')
 
 randomtop.append(fr'''{Back.BLUE}{Fore.WHITE}
+>access security
+Access Denied.
+>access security grid
+Access Denied. And...
 YOU DIDN'T SAY THE MAGIC WORD!
 YOU DIDN'T SAY THE MAGIC WORD!
 YOU DIDN'T SAY THE MAGIC WORD!
@@ -322,10 +322,12 @@ YOU DIDN'T SAY THE MAGIC WORD!
 
 quotes = []
 quotes.append('The quieter you become, the more you are able to hear.')
-quotes.append('h4ck th3 w0rld!')
+quotes.append('h4ck th3 pl4n3t!')
 quotes.append('foo.bar()')
 quotes.append('Hello World!')
 quotes.append('Goodbye Cruel World!')
+quotes.append('tmux > screen')
+quotes.append('Obfustucation != Security')
 randomquote = random.choice(quotes)
 
 
@@ -1096,51 +1098,30 @@ Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
 Made By {styleBold}{Fore.YELLOW}SpiceSouls{styleReset}
 Version {styleBold}{Fore.YELLOW}2.0.0{styleReset}'''
 				print(banner)
-				exmenu = f'''
-{styleBold}-1-{styleReset} Social Media Hunter
+				osmenu = f'''
+{styleBold}-1-{styleReset} DNS Record Searcher
 
 {styleBold}-0-{styleReset} Return To Menu
 '''
-				print(exmenu)
+				print(osmenu)
 				while True:
 					
-					exmenuchoice = str(input(f'{styleBold}#{styleReset}/OSINT '))
+					osmenuchoice = str(input(f'{styleBold}#{styleReset}/OSINT '))
 
-					if exmenuchoice == '0':
+					if osmenuchoice == '0':
 						loopbreak()
 						break
 
-
-					elif exmenuchoice == '1':
+					elif osmenuchoice == '1':
 						clear()
-						username = str(input(f'USERNAME {Fore.YELLOW}>>>{Fore.RESET} '))
-						warning('Searching...')
-						socialmedia = [f'https://www.instagram.com/{username}', 
-						f'https://www.facebook.com/{username}',
-						f'https://{username}.tumblr.com/',
-						f'https://www.pinterest.co.uk/{username}',
-						f'http://www.linkedin.com/in/{username}'
-							]
-						for url in socialmedia:
-							try:
-								r = requests.get(url)
-								if r.status_code == 404:
-									pass
-								elif r.status_code == 302:
-									pass
-								elif "this page isn't available." in r.text:
-									pass
-								elif "Try searching for another." in r.text:
-									pass
-								elif "could not be found." in r.text:
-									pass
-								else:
-									success(url)
-							except Exception as e:
-								error(e)
-
-						print('\n')
-						success('Finished!')
+						domain = str(input(f'DOMAIN {Fore.YELLOW}>>>{Fore.RESET} '))
+						warning(f'Finding records for {domain}...')
+						r = requests.get(f'https://api.hackertarget.com/hostsearch/?q={domain}')
+						result = r.text.split('\n')
+						for r in result:
+							r = r.split(',')
+							success(f'{r[0]}')
+							print(f'| {r[1]}\n')
 						input('Press ENTER To Continue.')
 						loopbreak()
 						break
